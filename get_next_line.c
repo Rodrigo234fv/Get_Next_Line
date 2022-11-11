@@ -6,7 +6,7 @@
 /*   By: rode-alb <rode-alb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 13:49:01 by rode-alb          #+#    #+#             */
-/*   Updated: 2022/11/11 18:02:56 by rode-alb         ###   ########.fr       */
+/*   Updated: 2022/11/11 18:38:18 by rode-alb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*get_next_line(int fd)
 	line = 0;
 	while (read(fd, buffer, BUFFER_SIZE) > 0)
 	{
-		write ()
+		while (buffer != '\n')
 		i++;
 	}
 	return (line);
