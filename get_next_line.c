@@ -14,20 +14,33 @@
 
 char	*get_next_line(int fd)
 {
-	char	buffer[BUFFER_SIZE + 1];
+	static char	buffer[BUFFER_SIZE + 1];
 	char	*line;
-	int		i;
 
-	i = 0;
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	line = 0;
+	line = NULL;
 	while (read(fd, buffer, BUFFER_SIZE) > 0)
 	{
-		while (buffer != '\n')
-		i++;
+		line = ft_strjoin(line, buffer);
 	}
 	return (line);
 }
 
+#include <fcntl.h>
+int main ()
+{
+	int		fd;
+	char	*line;
 
+	fd = open("test.txt", O_RDONLY);
+	while (1)
+	{
+		line = get_next_line(fd);
+		if (line == NULL)
+			break ;
+		printf("%s\n", line);
+		free(line);
+	}
+	return (0);
+}
