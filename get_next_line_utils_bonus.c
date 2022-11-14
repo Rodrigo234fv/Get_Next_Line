@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rode-alb <rode-alb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/11 13:49:04 by rode-alb          #+#    #+#             */
-/*   Updated: 2022/11/14 18:32:11 by rode-alb         ###   ########.fr       */
+/*   Created: 2022/11/14 16:06:27 by rode-alb          #+#    #+#             */
+/*   Updated: 2022/11/14 18:32:17 by rode-alb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 int	ft_strlen(char *str)
 {
@@ -34,7 +34,7 @@ char	*ft_strjoin(char *s1, char *s2)
 
 	i = 0;
 	k = 0;
-	str = (char *)malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
+	str = (char *)malloc(sizeof (char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
 	if (!str)
 		return (NULL);
 	while (s1 && s1[i])
@@ -51,17 +51,4 @@ char	*ft_strjoin(char *s1, char *s2)
 	}
 	str[i] = '\0';
 	return (str);
-}
-
-char	*clear_error(char *buffer, int fd)
-{
-	int	i;
-
-	i = 0;
-	if (fd < 0 || BUFFER_SIZE <= 0)
-	{
-		while (buffer[i++])
-			buffer[i] = 0;
-	}
-	return (NULL);
 }

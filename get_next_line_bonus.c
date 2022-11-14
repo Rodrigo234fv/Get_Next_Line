@@ -1,39 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rode-alb <rode-alb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/11 13:49:01 by rode-alb          #+#    #+#             */
-/*   Updated: 2022/11/14 18:33:28 by rode-alb         ###   ########.fr       */
+/*   Created: 2022/11/14 16:07:50 by rode-alb          #+#    #+#             */
+/*   Updated: 2022/11/14 18:32:25 by rode-alb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char	*get_next_line(int fd)
 {
-	static char	buffer[BUFFER_SIZE + 1];
+	static char	buffer[FOPEN_MAX][BUFFER_SIZE + 1];
 	char		*line;
 	int			i;
 	int			j;
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
-		return (clear_error(buffer, fd));
+	if (fd < 0 || BUFFER_SIZE <= 0 || fd >= FOPEN_MAX)
+		return (NULL);
 	line = NULL;
-	while (buffer[0] || read(fd, buffer, BUFFER_SIZE) > 0)
+	while (buffer[fd][0] || read(fd, buffer[fd], BUFFER_SIZE) > 0)
 	{
-		line = ft_strjoin(line, buffer);
+		line = ft_strjoin(line, buffer[fd]);
 		i = 0;
 		j = -1;
-		while (buffer[i])
+		while (buffer[fd][i])
 		{
 			if (j != -1)
-				buffer[j++] = buffer[i];
-			if (buffer[i] == '\n' && j == -1)
+				buffer[fd][j++] = buffer[fd][i];
+			if (buffer[fd][i] == '\n' && j == -1)
 				j = 0;
-			buffer[i++] = 0;
+			buffer[fd][i++] = 0;
 		}
 		if (line[ft_strlen(line) - 1] == '\n')
 			break ;
@@ -47,8 +47,6 @@ char	*get_next_line(int fd)
 	char	*line;
 
 	fd = open("test.txt", O_RDONLY);
-
-	// printf("%s", get_next_line(fd));
 	while ((line = get_next_line(fd)))
 	{
 		printf("%s", line);
@@ -56,13 +54,3 @@ char	*get_next_line(int fd)
 	}
 	return (0);
 } */
-
-/*
-Vai aparecer um erro na parte read_error.txt
-
-while (buffer[i++])
-	buffer[i] = 0;
-
-Meter isso no primeiro if
-Mas nao ha probleme se, porque a moulinette n verifica isso.
-*/
